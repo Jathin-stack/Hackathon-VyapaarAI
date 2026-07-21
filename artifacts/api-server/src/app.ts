@@ -41,12 +41,17 @@ app.use("/api", router);
 app.use(express.static(publicDir));
 
 // Fallback route for Single Page Application (SPA) routing
-app.get("(.*)", (req: Request, res: Response, next: NextFunction) => {
-  if (req.path.startsWith("/api")) {
-    next();
+app.use((req: Request, res: Response, _next: NextFunction) => {
+  if (req.method !== "GET" || req.path.startsWith("/api")) {
+    res.status(404).json({ message: "Not Found" });
     return;
   }
-  res.sendFile(path.join(publicDir, "index.html"));
+  const indexPath = path.join(publicDir, "index.html");
+  res.sendFile(indexPath, (err) => {
+    if (err) {
+      res.status(404).json({ message: "Not Found" });
+    }
+  });
 });
 
 export default app;
