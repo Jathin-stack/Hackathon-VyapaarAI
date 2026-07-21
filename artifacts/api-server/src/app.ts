@@ -41,7 +41,7 @@ app.use("/api", router);
 app.use(express.static(publicDir));
 
 // Fallback route for Single Page Application (SPA) routing
-app.get("*", (req: Request, res: Response, next: NextFunction) => {
+app.get("(.*)", (req: Request, res: Response, next: NextFunction) => {
   if (req.path.startsWith("/api")) {
     next();
     return;
