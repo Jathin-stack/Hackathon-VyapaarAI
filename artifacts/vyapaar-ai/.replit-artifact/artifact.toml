@@ -1,0 +1,23 @@
+kind = "web"
+previewPath = "/"
+title = "Vyapaar AI"
+version = "1.0.0"
+id = "artifacts/vyapaar-ai"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25694
+
+[services.development]
+run = "pnpm --filter @workspace/vyapaar-ai run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/vyapaar-ai", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/vyapaar-ai/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"

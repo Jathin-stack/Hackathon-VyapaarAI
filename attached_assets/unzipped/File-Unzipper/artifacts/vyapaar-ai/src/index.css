@@ -1,0 +1,199 @@
+@layer theme, base, clerk, components, utilities;
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+:root {
+  --ink: #2A1F14;
+  --ink-soft: rgba(63,46,30,0.65);
+  --paper: #FDF9F1;
+  --paper-card: #FFFCF5;
+  --primary: #F5A623;
+  --secondary: #C1440E;
+  --secondary-deep: #9B2E00;
+  --border-soft: rgba(42,31,20,0.08);
+  --border-medium: rgba(42,31,20,0.10);
+}
+
+@layer base {
+  html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+  body { @apply bg-paper text-ink font-sans; background-color: #FDF9F1; color: #2A1F14; }
+  ::selection { background: rgba(245,166,35,0.25); }
+}
+
+@layer components {
+  .glass-card {
+    background: rgba(255,251,240,0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-soft);
+    border-radius: 20px;
+    box-shadow: 0 8px 24px -12px rgba(42,31,20,0.15);
+  }
+
+  .card {
+    background: var(--paper-card);
+    border: 1px solid var(--border-soft);
+    border-radius: 20px;
+    box-shadow: 0 4px 14px -6px rgba(42,31,20,0.08);
+  }
+  .card-hover { @apply transition-all duration-300; }
+  .card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px -8px rgba(42,31,20,0.16);
+  }
+
+  .hero-card {
+    background: linear-gradient(135deg, #E8901A 0%, #C1440E 55%, #6B1F04 100%);
+    border-radius: 20px;
+    box-shadow: 0 24px 60px -20px rgba(155,46,0,0.55), 0 8px 20px -8px rgba(193,68,14,0.3), inset 0 1px 0 rgba(255,255,255,0.15);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(120% 90% at 0% 0%, rgba(255,210,120,0.75) 0%, transparent 55%), radial-gradient(120% 90% at 100% 100%, rgba(90,15,0,0.85) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .amount { font-family: 'Fraunces', serif; font-weight: 700; letter-spacing: -0.01em; }
+  .amount-sale { color: #22683F; }
+  .amount-purchase { color: #5A3778; }
+  .amount-credit { color: #C9760F; }
+  .amount-overdue { color: #9B2E00; }
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .tag-sale      { background: #E8F4EC; color: #22683F; }
+  .tag-purchase  { background: #F1E9F8; color: #5A3778; }
+  .tag-credit    { background: #FDECC5; color: #8A5A0B; }
+  .tag-inventory { background: #E5F0F7; color: #315C7B; }
+  .tag-overdue   { background: #FDE1DC; color: #9B2E00; }
+  .tag-neutral   { background: #F4EEDF; color: #6B5836; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 600;
+    transition: all 0.2s;
+    background: linear-gradient(135deg, #F5A623, #C1440E);
+    color: #fff !important;
+    border-radius: 10px;
+    padding: 9px 18px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 6px 14px -6px rgba(193,68,14,0.45);
+  }
+  .btn-primary:hover { filter: brightness(1.06); box-shadow: 0 10px 22px -8px rgba(193,68,14,0.55); }
+  .btn-primary:active { transform: scale(0.97); }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 600;
+    transition: all 0.2s;
+    background: rgba(47,125,78,0.10);
+    color: #22683F;
+    border: 1px solid rgba(47,125,78,0.20);
+    border-radius: 10px;
+    padding: 8px 16px;
+    font-size: 13px;
+    cursor: pointer;
+  }
+  .btn-ghost:hover { background: rgba(47,125,78,0.16); }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.7);
+    border: 1px solid var(--border-medium);
+    color: #3F2E1E;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: all 0.18s ease;
+    cursor: pointer;
+  }
+  .chip:hover { background: #FFFFFF; }
+  .chip.active {
+    background: linear-gradient(135deg, #F5A623, #C1440E);
+    color: #fff;
+    border-color: transparent;
+    box-shadow: 0 6px 14px -4px rgba(193,68,14,0.4);
+  }
+
+  .nav-item {
+    @apply flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200;
+    color: #4A3A24;
+  }
+  .nav-item:hover { background: rgba(245,166,35,0.1); color: #C1440E; }
+  .nav-item-active {
+    background: linear-gradient(135deg, #F5A623, #C1440E) !important;
+    color: #fff !important;
+    box-shadow: 0 4px 12px -4px rgba(193,68,14,0.4);
+  }
+
+  .section-divider { display: flex; align-items: center; gap: 8px; padding: 20px 20px 0; }
+  .section-divider .rule {
+    height: 1px; flex: 1;
+    background: linear-gradient(90deg, transparent, rgba(245,166,35,0.4), transparent);
+  }
+  .section-divider .label {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em;
+    font-weight: 600; color: #C1440E;
+  }
+
+  .stat-label { @apply text-xs font-semibold uppercase tracking-wider; color: var(--ink-soft); }
+  .scrollbar-thin::-webkit-scrollbar { width: 5px; height: 5px; }
+  .scrollbar-thin::-webkit-scrollbar-thumb { background: rgba(42,31,20,0.15); border-radius: 9999px; }
+
+  .shimmer {
+    background: linear-gradient(90deg, rgba(42,31,20,0.05) 0%, rgba(42,31,20,0.12) 50%, rgba(42,31,20,0.05) 100%);
+    background-size: 800px 100%;
+    animation: shimmer 1.4s linear infinite;
+    border-radius: 6px;
+  }
+}
+
+.marigold-blur {
+  position: absolute; height: 340px; width: 340px; border-radius: 9999px;
+  filter: blur(80px); opacity: 0.55; pointer-events: none;
+}
+.marigold-tl { top: -100px; left: -80px; background: radial-gradient(circle, #FFB84D 0%, transparent 60%); }
+.marigold-br { bottom: -80px; right: -80px; background: radial-gradient(circle, #F5A623 0%, transparent 60%); }
+
+.border-strip {
+  position: absolute; left: 0; right: 0; height: 6px;
+  background-image: radial-gradient(#F79E2A 1.5px, transparent 1.6px);
+  background-size: 12px 6px; opacity: 0.35;
+}
+
+.kirana-bg {
+  background: radial-gradient(60% 40% at 50% 0%, #FEEFCF 0%, #FDF9F1 60%, #FDF9F1 100%);
+}

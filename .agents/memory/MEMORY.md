@@ -1,0 +1,1 @@
+- [Vyapaar AI Architecture](vyapaar-ai-architecture.md) — demo-mode auth, wa.me WhatsApp service layer, mock data only, 12-language i18n context

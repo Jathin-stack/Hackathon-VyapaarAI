@@ -1,0 +1,599 @@
+# MASTER PROMPT FOR VYAPAAR AI (CONTINUE THE EXISTING PROJECT)
+
+Analyze the complete existing Vyapaar AI codebase before making any modifications. Do NOT create a new project. Continue building on the existing architecture, components, database models, and UI.
+
+## IMPORTANT
+
+1. Do not remove any existing features.
+2. Preserve the existing UI and animations.
+3. Resolve all existing errors.
+4. Make every feature production-ready.
+5. All new features must be integrated with the existing modules.
+6. Make the application mobile responsive.
+7. Optimize the codebase and remove all bugs.
+8. Follow proper TypeScript practices.
+9. Use reusable components wherever possible.
+
+---
+
+## WHATSAPP MODULE (HIGH PRIORITY)
+
+Currently:
+
+* WhatsApp buttons do not navigate.
+* Customer send buttons are not working.
+* Templates are static.
+* No automation exists.
+
+Convert the WhatsApp module into a complete AI powered WhatsApp Automation System.
+
+### FEATURE 1
+
+### WHATSAPP NAVIGATION
+
+When clicking:
+
+* Send Message
+* Festival Offer
+* Customer Message
+* Supplier Message
+
+it should automatically redirect to WhatsApp.
+
+Use:
+
+* WhatsApp Click to Chat
+* whatsapp://send
+* https://wa.me/
+
+Examples:
+
+Customer:
+https://wa.me/919876543210?text=message
+
+Supplier:
+https://wa.me/919876543210?text=message
+
+Retail Owner:
+https://wa.me/919876543210?text=message
+
+The application must automatically:
+
+* encode messages
+* encode spaces
+* support all languages
+
+---
+
+## FEATURE 2
+
+### AUTOMATIC LOW STOCK ALERT TO SUPPLIERS
+
+Analyze:
+
+Inventory Module
+
+Existing fields:
+
+* stock
+* reorderLevel
+* soldToday
+* soldWeek
+* trends
+
+When:
+
+stock <= reorderLevel
+
+automatically generate:
+
+* supplier message
+* quantity recommendation
+* expected delivery date
+* priority level
+
+Example:
+
+---
+
+Hello ABC Suppliers,
+
+The following items are running low:
+
+* Tea = 20 units
+* Milk = 10 units
+* Rice = 15 units
+
+Recommended quantity:
+
+* Tea = 100 units
+* Milk = 50 units
+* Rice = 80 units
+
+Please deliver before:
+
+18 July 2026
+
+Regards,
+Vyapaar AI
+
+---
+
+Requirements:
+
+Automatically:
+
+* calculate quantity
+* calculate predicted demand
+* select suppliers
+* send WhatsApp message
+* support multiple suppliers.
+
+---
+
+## FEATURE 3
+
+### AI PREDICTIVE BUYING SYSTEM
+
+Build:
+
+AI Stock Prediction Engine.
+
+Analyze:
+
+* previous sales
+* weather
+* festivals
+* weekly sales
+* monthly trends
+* seasonal products
+
+Predict:
+
+What items should the retailer buy tomorrow.
+
+Examples:
+
+Tomorrow:
+
+Buy:
+
+* Tea
+* Milk
+* Biscuits
+* Rice
+* Chocolates
+
+Reason:
+
+* Rain expected
+* Weekend demand
+* Festival approaching
+
+Send automatically through:
+
+* WhatsApp
+* Notifications
+* Dashboard
+* Voice Assistant
+
+Message:
+
+---
+
+Good Morning.
+
+Today's Recommended Purchases:
+
+1. Tea = 100 units
+2. Milk = 50 units
+3. Biscuits = 80 units
+4. Rice = 40 units
+
+Reasons:
+
+* Rain expected tomorrow
+* Increased customer demand
+* Festival approaching
+
+Please keep the stock ready.
+
+Regards,
+Vyapaar AI
+
+---
+
+Display:
+
+* Dashboard
+* Notifications
+* Recommendations
+* WhatsApp
+* Voice Assistant
+
+---
+
+## FEATURE 4
+
+### FESTIVAL OFFER AUTOMATION
+
+Build:
+
+AI Festival Marketing System.
+
+Analyze:
+
+* Indian Festivals
+* Local Festivals
+* Weather
+* Seasonal products
+* Customer behaviour
+
+Examples:
+
+* Diwali
+* Sankranti
+* Ugadi
+* Pongal
+* Eid
+* Christmas
+* Dussehra
+* Holi
+* Ramzan
+
+Automatically suggest:
+
+* offers
+* discounts
+* combo packs
+* coupons
+* reward points
+
+Examples:
+
+Festival Offer:
+
+---
+
+Happy Sankranti.
+
+Special Offers:
+
+* Buy 2 Get 1 Free
+* 20% discount on sweets
+* Flat Rs 50 off above Rs 500
+
+Visit our store today.
+
+---
+
+Automatically:
+
+* send WhatsApp messages
+* send notifications
+* show countdown timer
+* suggest best selling products
+
+---
+
+## FEATURE 5
+
+### CUSTOMER MARKETING AUTOMATION
+
+Customers should automatically be divided into:
+
+* Premium
+* Frequent
+* Returning
+* Inactive
+
+Generate:
+
+Premium Customers:
+
+* loyalty rewards
+* exclusive offers
+
+Inactive Customers:
+
+* comeback offers
+
+Frequent Customers:
+
+* bonus points
+
+Returning Customers:
+
+* festival offers
+
+Examples:
+
+---
+
+Dear Customer,
+
+We miss you.
+
+Enjoy 15% OFF on your next purchase.
+
+Offer valid till tomorrow.
+
+Regards,
+Vyapaar AI
+
+---
+
+Automatically:
+
+* send WhatsApp messages
+* personalize customer names
+* support all languages.
+
+---
+
+## FEATURE 6
+
+### SUPPLIER MANAGEMENT AUTOMATION
+
+Build:
+
+AI Supplier Recommendation Engine.
+
+Analyze:
+
+* delivery days
+* price
+* ratings
+* categories
+* previous orders
+
+Recommend:
+
+Best Supplier.
+
+Example:
+
+---
+
+Recommended Supplier:
+
+ABC Traders
+
+Reason:
+
+* Cheapest Price
+* 1 day delivery
+* 4.9 ratings
+* Available stock
+
+---
+
+Automatically:
+
+* generate order message
+* generate estimated costs
+* calculate profit margins
+* predict delivery dates.
+
+---
+
+## FEATURE 7
+
+### OWNER DAILY WHATSAPP REPORT
+
+Every morning generate:
+
+---
+
+GOOD MORNING REPORT
+
+Today's Suggestions:
+
+Buy:
+
+* Tea
+* Milk
+* Rice
+
+Low Stock:
+
+* Biscuits
+* Bread
+
+High Demand:
+
+* Chocolates
+* Tea
+
+Festival:
+
+* Diwali approaching
+
+Recommended Offers:
+
+* Buy 2 Get 1 Free
+
+Today's Profit:
+
+Rs XXXXX
+
+Estimated Revenue:
+
+Rs XXXXX
+
+---
+
+Automatically display in:
+
+* Dashboard
+* Notifications
+* WhatsApp
+* Voice Assistant.
+
+---
+
+## FEATURE 8
+
+### AI WHATSAPP COMMANDS
+
+Support:
+
+Retailer can send:
+
+* Stock Report
+* Today's Sales
+* Buy Recommendations
+* Supplier Details
+* Festival Offers
+
+Examples:
+
+"Show today's stock"
+
+"What should I buy tomorrow?"
+
+"Generate festival offer"
+
+"Send supplier message"
+
+"Show profit report"
+
+Voice Assistant must support:
+
+* English
+* Hindi
+* Telugu
+* Tamil
+* Malayalam
+* Kannada
+* Bengali
+* Marathi
+* Gujarati
+* Punjabi
+* Urdu
+
+---
+
+## FEATURE 9
+
+### DASHBOARD IMPROVEMENTS
+
+Add:
+
+AI Cards:
+
+* Today's Suggestions
+* Low Stock Alerts
+* Predicted Demand
+* Festival Countdown
+* Best Seller Products
+* Recommended Purchases
+* Supplier Alerts
+* WhatsApp Campaign Analytics
+
+Display:
+
+* Total Messages
+* Delivered Messages
+* Supplier Messages
+* Customer Messages
+* Pending Alerts
+* Today's Recommendations
+
+---
+
+## FEATURE 10
+
+### REAL WHATSAPP API INTEGRATION
+
+Make the architecture ready for:
+
+* WhatsApp Business API
+* Twilio WhatsApp API
+* Meta Cloud API
+
+Create:
+
+services/
+
+* whatsappService.ts
+* inventoryPrediction.ts
+* supplierRecommendation.ts
+* festivalEngine.ts
+* customerSegmentation.ts
+* notificationService.ts
+
+The system must support:
+
+Current:
+
+* Click to Chat
+
+Future:
+
+* WhatsApp Business API
+* Twilio
+* Meta APIs
+
+so no major code changes are required.
+
+---
+
+## BUG FIXES
+
+Resolve all:
+
+* navigation issues
+* routing issues
+* button functionality issues
+* state management issues
+* TypeScript errors
+* import issues
+* inventory calculations
+* recommendation bugs
+* responsiveness issues
+* notification issues
+* language translation issues
+
+Ensure:
+
+NO dummy buttons remain.
+
+---
+
+## FINAL REQUIREMENTS
+
+The completed project should behave like:
+
+"India's First AI Powered Kirana Business Operating System."
+
+Features include:
+
+* AI Stock Prediction
+* Supplier Automation
+* WhatsApp Automation
+* Festival Marketing Automation
+* AI Recommendations
+* Voice Assistant
+* Predictive Analytics
+* Smart Notifications
+* Daily Owner Reports
+* Customer Segmentation
+* Automated Supplier Ordering
+* Automated Festival Campaigns
+* Multi-language Support
+* WhatsApp Business Integration Ready
+* Real-time Inventory Intelligence
+
+Every recommendation must be generated using:
+
+* Inventory data
+* Weather data
+* Festivals
+* Customer behaviour
+* Weekly sales
+* Product trends
+* Supplier information
+* Predictive Analytics
+
+Do NOT redesign the project from scratch. Continue from the existing Vyapaar AI codebase and make all features fully functional, intelligent, automated, and production-ready.
