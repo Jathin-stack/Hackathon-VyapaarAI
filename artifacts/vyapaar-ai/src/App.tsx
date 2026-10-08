@@ -261,7 +261,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 // ─── Root ──────────────────────────────────────────────────────────────────────
 function App() {
   return (
-    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID || "365313364966-70f90mmejld71f83v18e5tq5e2526eik.apps.googleusercontent.com"}>
+    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID || "192346794348-4497bibvto8vm4lrsc744313v7qedu7b.apps.googleusercontent.com"}>
       <QueryClientProvider client={queryClient}>
         <WouterRouter base={basePath}>
           <LanguageProvider>
