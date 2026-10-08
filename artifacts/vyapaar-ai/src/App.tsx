@@ -285,6 +285,15 @@ function AppRouter() {
       <Route path="/app">
         {() => <AppRoute />}
       </Route>
+      <Route path="/sso-callback">
+        {() => {
+          if (clerkKey) {
+            const { AuthenticateWithRedirectCallback } = require('@clerk/react');
+            return <AuthenticateWithRedirectCallback signUpForceRedirectUrl="/app" />;
+          }
+          return <Redirect to="/app" />;
+        }}
+      </Route>
       <Route>{() => <Redirect to="/" />}</Route>
     </Switch>
   );
