@@ -156,36 +156,11 @@ function SignInContent({
   setLocation: (loc: string) => void;
 }) {
   const { user, signOut } = useAuth();
-  const [approvedState, setApprovedState] = useState(false);
-
-  // Check if session is already approved
-  const isApproved = approvedState || (typeof window !== 'undefined' && sessionStorage.getItem('vyapaar-login-approved') === 'true');
-
   useEffect(() => {
-    if (user && isApproved) {
+    if (user) {
       setLocation('/app');
     }
-  }, [user, isApproved, setLocation]);
-
-  if (user && !isApproved) {
-    return (
-      <LoginApprovalView
-        email={user.email}
-        onApprove={() => {
-          if (typeof window !== 'undefined') {
-            sessionStorage.setItem('vyapaar-login-approved', 'true');
-          }
-          setApprovedState(true);
-        }}
-        onCancel={async () => {
-          if (typeof window !== 'undefined') {
-            sessionStorage.removeItem('vyapaar-login-approved');
-          }
-          await signOut();
-        }}
-      />
-    );
-  }
+  }, [user, setLocation]);
 
   return (
     <AuthPage
@@ -202,9 +177,6 @@ function SignInRoute({ defaultMode = 'signin' }: { defaultMode?: 'signin' | 'sig
 
   return (
     <AuthProvider onSignOut={() => {
-      if (typeof window !== 'undefined') {
-        sessionStorage.removeItem('vyapaar-login-approved');
-      }
       setLocation('/');
     }}>
       <SignInContent mode={mode} setMode={setMode} setLocation={setLocation} />
@@ -225,19 +197,13 @@ function AppRouteContent() {
     window.localStorage.setItem('vyapaar-onboarded', onboarded ? 'true' : 'false');
   }, [onboarded]);
 
-  const isApproved = typeof window !== 'undefined' && sessionStorage.getItem('vyapaar-login-approved') === 'true';
-
   useEffect(() => {
-    if (!loading) {
-      if (!user) {
-        navigate('/signin');
-      } else if (!isApproved) {
-        navigate('/signin');
-      }
+    if (!loading && !user) {
+      navigate('/signin');
     }
-  }, [user, loading, isApproved, navigate]);
+  }, [user, loading, navigate]);
 
-  if (loading || !user || !isApproved) {
+  if (loading || !user) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-paper">
         <span className="w-8 h-8 border-4 border-primary/30 border-t-primary rounded-full animate-spin" />
@@ -254,9 +220,6 @@ function AppRoute() {
   const [, navigate] = useLocation();
 
   const handleSignOut = () => {
-    if (typeof window !== 'undefined') {
-      sessionStorage.removeItem('vyapaar-login-approved');
-    }
     navigate('/');
   };
 
