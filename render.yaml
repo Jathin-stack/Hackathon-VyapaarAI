@@ -22,7 +22,7 @@ services:
     env: static
     plan: free
     buildCommand: npx pnpm install && npx pnpm --filter @workspace/vyapaar-ai build
-    staticPublishPath: artifacts/vyapaar-ai/dist
+    staticPublishPath: artifacts/vyapaar-ai/dist/public
     routes:
       - type: rewrite
         source: /*
