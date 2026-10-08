@@ -198,9 +198,9 @@ function SignInContent({
   );
 }
 
-function SignInRoute() {
+function SignInRoute({ defaultMode = 'signin' }: { defaultMode?: 'signin' | 'signup' }) {
   const [, setLocation] = useLocation();
-  const [mode, setMode] = useState<'signin' | 'signup'>('signin');
+  const [mode, setMode] = useState<'signin' | 'signup'>(defaultMode);
 
   return (
     <AuthProvider onSignOut={() => {
@@ -275,12 +275,15 @@ function AppRouter() {
     <Switch>
       <Route path="/">
         {() => <LandingPage
-          onGetStarted={() => { window.location.pathname = `${basePath}/app`; }}
+          onGetStarted={() => { window.location.pathname = `${basePath}/signup`; }}
           onSignIn={() => { window.location.pathname = `${basePath}/signin`; }}
         />}
       </Route>
+      <Route path="/signup">
+        {() => <SignInRoute defaultMode="signup" />}
+      </Route>
       <Route path="/signin">
-        {() => <SignInRoute />}
+        {() => <SignInRoute defaultMode="signin" />}
       </Route>
       <Route path="/app">
         {() => <AppRoute />}
