@@ -27,7 +27,24 @@ export function AuthProvider({
   onSignOut?: () => void;
 }) {
   const [user, setUser] = useState<AuthUser | null>(null);
-  const [loading, setLoading] = useState(false); // Can be used to check initial session later
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchSession = async () => {
+      try {
+        const res = await fetch('/api/auth/me');
+        if (res.ok) {
+          const data = await res.json();
+          setUser(data);
+        }
+      } catch (e) {
+        console.error("Failed to fetch session", e);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchSession();
+  }, []);
 
   const signIn = async (email: string, password?: string) => {
     try {

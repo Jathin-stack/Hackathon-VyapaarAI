@@ -40,7 +40,9 @@ export function AuthPage({ mode, onBack, onToggleMode }: AuthPageProps) {
     setLoading(true);
     const { error } = isSignUp ? await signUp(email, password) : await signIn(email, password);
     setLoading(false);
-    if (error) { setError(error); } else if (isSignUp) { setSuccess(true); }
+    if (error) { setError(error); } 
+    // In our custom backend, sign up automatically logs the user in.
+    // So we don't need to show a success screen, AuthContext will update and redirect!
   };
 
   const handleSendOtp = async (e: React.FormEvent) => {

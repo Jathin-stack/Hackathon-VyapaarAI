@@ -113,10 +113,76 @@ router.post("/login", async (req, res) => {
   }
 });
 
+// Mock Google Auth Route for Hackathon
+router.get("/google", async (req, res) => {
+  try {
+    const email = "google_user@gmail.com";
+    const name = "Google User";
+    
+    let user = await db.query.usersTable.findFirst({
+      where: eq(usersTable.email, email)
+    });
+
+    if (!user) {
+      // Create User
+      user = await db.transaction(async (tx) => {
+        const [newUser] = await tx.insert(usersTable).values({
+          name,
+          email,
+          provider: "google",
+          googleId: "mock_google_id_123"
+        }).returning();
+
+        const [newBusiness] = await tx.insert(businessesTable).values({
+          name: `${name}'s Store`,
+          ownerId: newUser.id,
+        }).returning();
+
+        const [updatedUser] = await tx.update(usersTable)
+          .set({ businessId: newBusiness.id })
+          .where(eq(usersTable.id, newUser.id))
+          .returning();
+
+        return updatedUser;
+      });
+    }
+
+    const token = generateToken(user.id, user.businessId, user.role);
+    
+    res.cookie("accessToken", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      maxAge: 7 * 24 * 60 * 60 * 1000
+    });
+
+    // Redirect to the frontend dashboard
+    res.redirect("/app");
+  } catch (error) {
+    console.error("Google login error:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
 // Logout Route
 router.post("/logout", (req, res) => {
   res.clearCookie("accessToken");
   res.json({ message: "Logged out successfully" });
+});
+
+// Get Current User Route
+import { authenticate } from "../middleware/auth";
+router.get("/me", authenticate, (req, res) => {
+  if (!req.user) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+  res.json({
+    id: req.user.id,
+    name: req.user.name,
+    email: req.user.email,
+    role: req.user.role,
+    businessId: req.user.businessId
+  });
 });
 
 export default router;
