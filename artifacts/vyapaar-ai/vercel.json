@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://vyapaar-api-server.onrender.com/api/:path*"
+    }
+  ]
+}
