@@ -54,6 +54,13 @@ export default defineConfig({
     fs: {
       strict: true,
     },
+    proxy: {
+      '/api': {
+        target: 'http://localhost:10000',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
   },
   preview: {
     port,
