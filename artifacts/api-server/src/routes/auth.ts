@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { db, usersTable, businessesTable } from "@workspace/db";
 import { eq } from "drizzle-orm";
+import { authenticate } from "../middleware/auth";
 
 const router = Router();
 const JWT_SECRET = process.env.JWT_SECRET || "fallback_secret_for_hackathon";
@@ -191,7 +192,6 @@ router.post("/logout", (req, res) => {
 });
 
 // Get Current User Route
-import { authenticate } from "../middleware/auth";
 router.get("/me", authenticate, (req, res) => {
   if (!req.user) {
     return res.status(401).json({ message: "Unauthorized" });
