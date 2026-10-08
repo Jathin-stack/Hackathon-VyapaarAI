@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Store, Mail, Lock, ArrowRight, ArrowLeft, Eye, EyeOff, AlertCircle, CheckCircle2, Smartphone, KeyRound, RefreshCw, Mic, BarChart3, Users, TrendingUp } from 'lucide-react';
 import { useAuth } from '../auth/AuthContext';
-import { supabase } from '../lib/supabase';
 import heroShopkeeper from '@/assets/hero-shopkeeper.jpg';
 
 interface AuthPageProps {
@@ -48,27 +47,27 @@ export function AuthPage({ mode, onBack, onToggleMode }: AuthPageProps) {
     e.preventDefault();
     setError(null);
     setLoading(true);
-    const { error } = await supabase.auth.signInWithOtp({ email });
-    setLoading(false);
-    if (error) { setError(error.message); } else { setOtpSent(true); }
+    // Mock OTP for custom backend
+    setTimeout(() => {
+      setLoading(false);
+      setOtpSent(true);
+    }, 1000);
   };
 
   const handleVerifyOtp = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError(null);
-    setLoading(true);
-    const { error } = await supabase.auth.verifyOtp({ email, token: otp, type: 'email' });
-    setLoading(false);
-    if (error) { setError(error.message); }
+    setError("OTP login is not implemented in the new custom backend.");
   };
 
   const handleForgotPassword = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
     setLoading(true);
-    const { error } = await supabase.auth.resetPasswordForEmail(email);
-    setLoading(false);
-    if (error) { setError(error.message); } else { setSuccess(true); }
+    // Mock Forgot Password for custom backend
+    setTimeout(() => {
+      setLoading(false);
+      setSuccess(true);
+    }, 1000);
   };
 
   const handleGoogleLogin = async () => {
