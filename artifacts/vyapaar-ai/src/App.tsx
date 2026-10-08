@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Switch, Route, Router as WouterRouter, Redirect, useLocation } from 'wouter';
-import { ClerkProvider } from '@clerk/react';
 import { AuthProvider, useAuth } from './auth/AuthContext';
 import { LanguageProvider } from './i18n/LanguageContext';
 import { SidebarProvider, useSidebar } from './context/SidebarContext';
@@ -37,7 +36,6 @@ import { AIRecommendationsView } from './components/AIRecommendationsView';
 
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
 const queryClient = new QueryClient();
-const clerkKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY as string | undefined;
 
 // ─── Dashboard shell ───────────────────────────────────────────────────────────
 function AppDashboard() {
@@ -290,15 +288,6 @@ function AppRouter() {
       <Route path="/app">
         {() => <AppRoute />}
       </Route>
-      <Route path="/sso-callback">
-        {() => {
-          if (clerkKey) {
-            const { AuthenticateWithRedirectCallback } = require('@clerk/react');
-            return <AuthenticateWithRedirectCallback signUpForceRedirectUrl="/app" />;
-          }
-          return <Redirect to="/app" />;
-        }}
-      </Route>
       <Route>{() => <Redirect to="/" />}</Route>
     </Switch>
   );
@@ -306,7 +295,7 @@ function AppRouter() {
 
 // ─── Root ──────────────────────────────────────────────────────────────────────
 function App() {
-  const inner = (
+  return (
     <QueryClientProvider client={queryClient}>
       <WouterRouter base={basePath}>
         <LanguageProvider>
@@ -315,12 +304,6 @@ function App() {
       </WouterRouter>
     </QueryClientProvider>
   );
-
-  if (clerkKey) {
-    return <ClerkProvider publishableKey={clerkKey}>{inner}</ClerkProvider>;
-  }
-
-  return inner;
 }
 
 export default App;
