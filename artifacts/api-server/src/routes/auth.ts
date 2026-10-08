@@ -111,6 +111,9 @@ router.post("/login", async (req, res) => {
   } catch (error) {
     console.error("Login error:", error);
     res.status(500).json({ message: "Internal server error" });
+  }
+});
+
 // Real Google Auth Route for Hackathon
 router.post("/google", async (req, res) => {
   try {
