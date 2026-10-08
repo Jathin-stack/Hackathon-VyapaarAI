@@ -25,6 +25,9 @@ services:
     staticPublishPath: artifacts/vyapaar-ai/dist/public
     routes:
       - type: rewrite
+        source: /api/*
+        destination: https://vyapaar-api-server.onrender.com/api/*
+      - type: rewrite
         source: /*
         destination: /index.html
 
