@@ -10,7 +10,7 @@ Building the Future of Business Digitization for India's MSMEs and Micro-Merchan
 
 ## 🏆 Hackathon 2026 Submission
 
-**Theme:** Business Digitization
+**Theme:** Agentic AI & Intelligent Systems
 
 VyapaarAI (ArthOS AI) is an AI-powered autonomous Business Operating System designed to empower India's micro-merchants, Kirana stores, retailers, and MSMEs with intelligent decision-making capabilities.
 
