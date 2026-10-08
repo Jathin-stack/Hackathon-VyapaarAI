@@ -8,7 +8,7 @@ Building the Future of Business Digitization for India's MSMEs and Micro-Merchan
 
 ---
 
-## 🏆 Takeover Hackathon 2026 Submission
+## 🏆 Hackathon 2026 Submission
 
 **Theme:** Business Digitization
 
@@ -547,14 +547,15 @@ VyapaarAI directly addresses:
 
 ## 👥 Team
 
-**Team Name:** Neural Coup
+**Team Name:** Quiet Launch
 
 ### Team Members
 
 * Jathin Devidi
 * Ayush Devidi
 * Jashwanth Chary
-* Varun Goud
+* Sumanth Repala
+* Saicharan Rai
 
 ---
 
