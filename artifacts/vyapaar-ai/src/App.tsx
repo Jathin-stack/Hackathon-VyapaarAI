@@ -271,12 +271,14 @@ function AppRoute() {
 
 // ─── Router ────────────────────────────────────────────────────────────────────
 function AppRouter() {
+  const [, setLocation] = useLocation();
+
   return (
     <Switch>
       <Route path="/">
         {() => <LandingPage
-          onGetStarted={() => { window.location.pathname = `${basePath}/signup`; }}
-          onSignIn={() => { window.location.pathname = `${basePath}/signin`; }}
+          onGetStarted={() => setLocation('/signup')}
+          onSignIn={() => setLocation('/signin')}
         />}
       </Route>
       <Route path="/signup">
