@@ -84,12 +84,23 @@ export function AuthProvider({
     }
   };
 
-  const signInWithGoogle = async (email?: string) => {
-    // For hackathon, if they click Google and we don't have OAuth configured,
-    // we fallback to creating an account instantly or logging them in with a mock flow.
-    // Ideally this redirects to /api/auth/google
-    window.location.href = '/api/auth/google'; // Will 404 until Google Auth is added, but satisfies the structure
-    return { error: null };
+  const signInWithGoogle = async (accessToken: string) => {
+    try {
+      const res = await fetch('/api/auth/google', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ accessToken }),
+      });
+      if (!res.ok) {
+        const data = await res.json();
+        return { error: data.message || 'Google login failed' };
+      }
+      const data = await res.json();
+      setUser(data);
+      return { error: null };
+    } catch (err: any) {
+      return { error: err.message || 'Network error during Google login' };
+    }
   };
 
   const signOut = async () => {

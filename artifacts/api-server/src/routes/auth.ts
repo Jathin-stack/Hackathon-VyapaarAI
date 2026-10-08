@@ -110,14 +110,28 @@ router.post("/login", async (req, res) => {
   } catch (error) {
     console.error("Login error:", error);
     res.status(500).json({ message: "Internal server error" });
-  }
-});
-
-// Mock Google Auth Route for Hackathon
-router.get("/google", async (req, res) => {
+// Real Google Auth Route for Hackathon
+router.post("/google", async (req, res) => {
   try {
-    const email = "google_user@gmail.com";
-    const name = "Google User";
+    const { accessToken } = req.body;
+    
+    if (!accessToken) {
+      return res.status(400).json({ message: "Access token is required" });
+    }
+
+    // Verify the token with Google
+    const googleResponse = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+      headers: { Authorization: `Bearer ${accessToken}` }
+    });
+
+    if (!googleResponse.ok) {
+      return res.status(401).json({ message: "Invalid Google token" });
+    }
+
+    const googleUser = await googleResponse.json();
+    const email = googleUser.email;
+    const name = googleUser.name;
+    const googleId = googleUser.sub;
     
     let user = await db.query.usersTable.findFirst({
       where: eq(usersTable.email, email)
@@ -130,7 +144,8 @@ router.get("/google", async (req, res) => {
           name,
           email,
           provider: "google",
-          googleId: "mock_google_id_123"
+          googleId: googleId,
+          profileImage: googleUser.picture
         }).returning();
 
         const [newBusiness] = await tx.insert(businessesTable).values({
@@ -156,8 +171,13 @@ router.get("/google", async (req, res) => {
       maxAge: 7 * 24 * 60 * 60 * 1000
     });
 
-    // Redirect to the frontend dashboard
-    res.redirect("/app");
+    res.json({
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      businessId: user.businessId
+    });
   } catch (error) {
     console.error("Google login error:", error);
     res.status(500).json({ message: "Internal server error" });

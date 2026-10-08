@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Store, Mail, Lock, ArrowRight, ArrowLeft, Eye, EyeOff, AlertCircle, CheckCircle2, Smartphone, KeyRound, RefreshCw, Mic, BarChart3, Users, TrendingUp } from 'lucide-react';
+import { useGoogleLogin } from '@react-oauth/google';
 import { useAuth } from '../auth/AuthContext';
 import heroShopkeeper from '@/assets/hero-shopkeeper.jpg';
 
@@ -72,15 +73,20 @@ export function AuthPage({ mode, onBack, onToggleMode }: AuthPageProps) {
     }, 1000);
   };
 
-  const handleGoogleLogin = async () => {
-    setError(null);
-    setLoading(true);
-    const { error } = await signInWithGoogle(email);
-    setLoading(false);
-    if (error) {
-      setError(error);
+  const handleGoogleLogin = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      setError(null);
+      setLoading(true);
+      const { error } = await signInWithGoogle(tokenResponse.access_token);
+      setLoading(false);
+      if (error) {
+        setError(error);
+      }
+    },
+    onError: () => {
+      setError("Google login popup was closed or failed.");
     }
-  };
+  });
 
   const titleMap: Record<AuthMethod, string> = {
     password: isSignUp ? 'Create your account' : 'Welcome back',

@@ -293,16 +293,20 @@ function AppRouter() {
   );
 }
 
+import { GoogleOAuthProvider } from '@react-oauth/google';
+
 // ─── Root ──────────────────────────────────────────────────────────────────────
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <WouterRouter base={basePath}>
-        <LanguageProvider>
-          <AppRouter />
-        </LanguageProvider>
-      </WouterRouter>
-    </QueryClientProvider>
+    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID || "365313364966-70f90mmejld71f83v18e5tq5e2526eik.apps.googleusercontent.com"}>
+      <QueryClientProvider client={queryClient}>
+        <WouterRouter base={basePath}>
+          <LanguageProvider>
+            <AppRouter />
+          </LanguageProvider>
+        </WouterRouter>
+      </QueryClientProvider>
+    </GoogleOAuthProvider>
   );
 }
 
